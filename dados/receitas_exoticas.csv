@@ -1,0 +1,13 @@
+Name,Style,Size(L),OG,FG,ABV,IBU,Color,BoilSize,BoilTime,Efficiency,BrewMethod,SugarScale
+Cerveja de Jabuticaba,Fruit Beer,20.0,1.052,1.012,5.2,12,18,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Acai com Guarana,Fruit Beer,20.0,1.048,1.011,4.8,10,22,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Pequi,Specialty Fruit Beer,20.0,1.06,1.014,6.0,25,9,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Cupuacu,Fruit Beer,20.0,1.05,1.012,5.0,14,8,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Cafe com Pimenta Rosa,Spice/Herb Beer,20.0,1.065,1.014,6.5,30,35,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Maracuja com Mel,Fruit Beer,20.0,1.055,1.012,5.5,15,6,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Cacau e Canela,Spice/Herb Beer,20.0,1.07,1.016,7.0,20,32,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Abacaxi com Hortela,Fruit Beer,20.0,1.045,1.01,4.5,8,5,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Goiaba Vermelha,Fruit Beer,20.0,1.053,1.012,5.3,11,10,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Pimenta Biquinho,Spice/Herb Beer,20.0,1.062,1.013,6.2,35,7,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Mandioca Doce e Canela,Specialty Beer,20.0,1.058,1.013,5.8,18,14,24.0,60,70.0,All Grain,Specific Gravity
+Cerveja de Castanha do Para,Specialty Beer,20.0,1.068,1.015,6.8,22,19,24.0,60,70.0,All Grain,Specific Gravity
