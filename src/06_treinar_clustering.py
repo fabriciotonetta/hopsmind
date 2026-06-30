@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 dados = pd.read_csv("dados/receitas_final.csv")
+dados = dados[(dados["ABV"] <= 20) & (dados["IBU"] <= 150) & (dados["Color"] <= 50) & (dados["BoilSize"] <= 200) & (dados["OG"] <= 1.150)]
 
 colunas_para_cluster = ["OG", "FG", "ABV", "IBU", "Color", "BoilSize", "BoilTime", "Efficiency"]
 dados_numericos = dados[colunas_para_cluster]
