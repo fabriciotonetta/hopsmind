@@ -1,23 +1,30 @@
 import os
 from dotenv import load_dotenv
-import requests
+from google import genai
+from google.genai import types
 
 load_dotenv()
-token = os.getenv("HUGGINGFACE_TOKEN")
+chave_api = os.getenv("GOOGLE_API_KEY")
 
-API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
-headers = {"Authorization": f"Bearer {token}"}
+cliente = genai.Client(api_key=chave_api)
 
 def gerar_rotulo(nome_cerveja, estilo):
-    prompt = f"beer label design for '{nome_cerveja}', {estilo} style, artistic, vintage brewery label, illustration"
+    prompt = f"beer label design for '{nome_cerveja}', {estilo} style, artistic, vintage brewery label illustration, no text"
     print("Enviando pedido para a IA de imagem... aguarde")
-    response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
-    print("Resposta recebida! Codigo:", response.status_code)
-    if response.status_code == 200:
-        with open(f"rotulos_gerados/{nome_cerveja.replace(' ', '_')}.png", "wb") as f:
-            f.write(response.content)
-        print(f"Rotulo salvo para {nome_cerveja}")
-    else:
-        print("Erro:", response.status_code, response.text)
+
+    resposta = cliente.models.generate_content(
+        model="gemini-3.1-flash-image",
+        contents=[prompt],
+    )
+
+    for parte in resposta.candidates[0].content.parts:
+        if parte.inline_data is not None:
+            nome_arquivo = f"rotulos_gerados/{nome_cerveja.replace(' ', '_')}.png"
+            with open(nome_arquivo, "wb") as f:
+                f.write(parte.inline_data.data)
+            print(f"Rotulo salvo para {nome_cerveja}")
+            return
+
+    print("Nenhuma imagem foi retornada. Resposta completa:", resposta)
 
 gerar_rotulo("Cerveja de Jabuticaba", "Fruit Beer")
