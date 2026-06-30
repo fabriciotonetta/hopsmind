@@ -4,7 +4,7 @@ Este arquivo documenta a evolução do projeto **hopsmind**, dia a dia, incluind
 
 ---
 
-## Dia 1 — [PREENCHER DATA] — Fundação do projeto e dados
+## Dia 1 — [30/06/2026] — Fundação do projeto e dados
 
 ### O que foi feito
 - ✅ Ambiente de desenvolvimento configurado: Python 3.13.2, Git 2.54.0, VS Code
@@ -49,19 +49,79 @@ src/04_juntar_datasets.py
 - `05-primeiro-commit-github.png`
 - `06-dataset-final-unificado.png`
 
-### Próximos passos (retomar aqui)
-1. Análise exploratória do dataset final (estatísticas descritivas, distribuições de ABV/IBU/Color por estilo)
-2. Possível visualização gráfica dos dados (gráficos de distribuição) — bom material visual para o portfólio
-3. Preparação dos dados para Machine Learning (codificação de variáveis categóricas como `Style` e `BrewMethod`)
-4. Escolha e treinamento do modelo de geração/recomendação de receitas
-5. Avaliação do modelo
-6. Integração com IA generativa de imagens para os rótulos
-7. Documentação final (README, descrição do projeto, texto para recrutador)
-
-### Comando para retomar de onde paramos
-Ao voltar, abra o terminal na pasta do projeto e confirme que está tudo sincronizado:
+### Comando para retomar de onde paramos (usado no início do Dia 2)
 ```
 cd "D:\Portfólio I.A\hopsmind"
+git status
+git pull origin main
+```
+
+---
+
+## Dia 2 — [PREENCHER DATA] — Visualização de dados, ambiente virtual e início do Machine Learning
+
+### O que foi feito
+- ✅ Instaladas bibliotecas de visualização: `matplotlib` e `seaborn`
+- ✅ Análise exploratória visual (`src/05_visualizar_dados.py`), gerando 3 gráficos:
+  - Top 10 estilos de cerveja mais comuns no dataset (gráfico de barras)
+  - Distribuição do teor alcoólico/ABV (histograma com curva de densidade)
+  - Relação entre Cor (SRM) e Amargor/IBU (gráfico de dispersão, amostra de 3.000 receitas, `random_state=42` para reprodutibilidade)
+- ✅ Commit e push do progresso de visualização
+- ✅ Criado **ambiente virtual** (`.venv`) para isolar as dependências do projeto — boa prática profissional para evitar conflitos entre bibliotecas de diferentes projetos
+- ✅ Reinstaladas as bibliotecas dentro do ambiente virtual: `pandas`, `matplotlib`, `seaborn`, `scikit-learn`
+- ✅ Decisão de abordagem de IA definida: **Clustering (K-Means, 8 grupos) + geração de receitas** baseada nos padrões aprendidos pelos clusters
+- 🔄 Em andamento: `src/06_treinar_clustering.py` — preparação dos dados para o modelo de clustering
+
+### Decisões técnicas e por quê
+- **Ambiente virtual (`.venv`):** isola as dependências deste projeto do Python global do computador, evitando conflitos de versão com outros projetos futuros. Prática padrão de mercado.
+- **Abordagem de IA escolhida — Clustering + Geração (em vez de só regressão ou só geração simples):** permite demonstrar dois conceitos de Machine Learning no mesmo projeto (aprendizado não-supervisionado via K-Means, e lógica de geração de dados sintéticos a partir dos clusters aprendidos), além de viabilizar a geração de receitas "exóticas" de forma mais sofisticada futuramente.
+- **K=8 clusters:** número escolhido como equilíbrio entre granularidade (grupos suficientemente específicos) e simplicidade (não fragmentar demais os dados).
+- **`random_state=42` na amostragem do gráfico de dispersão:** garante reprodutibilidade — rodar o código novamente sempre gera a mesma amostra, facilitando comparações e depuração.
+
+### Insights obtidos com os gráficos
+- **American IPA** é disparadamente o estilo mais comum no dataset (quase 12.000 receitas), seguido por American Pale Ale (~7.500).
+- A maioria das receitas tem ABV concentrado entre 4,5% e 7%, com pico por volta de 5-5,5% — distribuição com formato de sino, consistente com cervejas comerciais/caseiras típicas.
+- Não foi identificada correlação forte entre Cor (SRM) e Amargor (IBU) — cervejas escuras não são necessariamente mais ou menos amargas que as claras neste dataset.
+
+### Obstáculos encontrados e como foram resolvidos
+- **IndentationError** no arquivo `05_visualizar_dados.py`: uma linha de código tinha espaço extra no início, sem pertencer a nenhum bloco — corrigido alinhando a indentação com as linhas vizinhas.
+- **Confusão entre terminal e editor de código:** comandos Python foram digitados por engano diretamente no terminal (PowerShell) em vez de dentro do arquivo `.py` — resolvido reforçando a diferença entre "escrever a receita" (arquivo `.py`) e "mandar executar a receita" (comando `python arquivo.py` no terminal).
+- **Falha no processo de documentação:** alguns prints deixaram de ser solicitados nas etapas de visualização e configuração do ambiente virtual. Recuperados retroativamente nesta atualização do diário (ver lista abaixo). Reforçado o processo: a cada etapa grande concluída, fazer uma checagem de "prints/commits pendentes" antes de seguir adiante.
+
+### Arquivos gerados no Dia 2
+```
+src/05_visualizar_dados.py
+src/06_treinar_clustering.py        (em andamento)
+
+prints/grafico_top_estilos.png
+prints/grafico_distribuicao_abv.png
+prints/grafico_cor_vs_ibu.png
+
+.venv/                               (ambiente virtual — não vai para o GitHub, listado no .gitignore)
+```
+
+### Prints capturados (Dia 2)
+- `07-ambiente-virtual-criado.png` — terminal mostrando `(.venv)` ativo e instalação das bibliotecas concluída *(recuperado retroativamente)*
+- Gráficos gerados automaticamente pelo código (já contam como material visual, sem necessidade de captura manual):
+  - `grafico_top_estilos.png`
+  - `grafico_distribuicao_abv.png`
+  - `grafico_cor_vs_ibu.png`
+
+### Próximos passos (retomar aqui)
+1. Finalizar preparação dos dados para o clustering (padronização com `StandardScaler` — entender por que é necessária)
+2. Treinar o modelo K-Means com 8 clusters
+3. Analisar e interpretar os clusters formados (que características definem cada grupo)
+4. **📸 Tirar print do resultado do treinamento** → `08-clustering-treinado.png`
+5. Construir a lógica de geração de receitas novas a partir dos clusters
+6. Avaliação/validação do modelo
+7. Integração com IA generativa de imagens para os rótulos
+8. Documentação final (README, descrição do projeto, texto para recrutador)
+
+### Comando para retomar de onde paramos
+Ao voltar, abra o terminal na pasta do projeto, ative o ambiente virtual (caso não ative sozinho) e confirme que está tudo sincronizado:
+```
+cd "D:\Portfólio I.A\hopsmind"
+.venv\Scripts\activate
 git status
 git pull origin main
 ```
